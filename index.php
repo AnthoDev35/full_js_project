@@ -1,5 +1,5 @@
 <?php
-require_once('frontend/index.html');
+require_once('./frontend/home.html');
 
 
 ?>

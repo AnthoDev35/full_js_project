@@ -15,7 +15,7 @@ function init_header_left(){
     const header_left = document.createElement('div');
     header_left.classList.add('header-logo');
     const header_left_img = document.createElement('img');
-    header_left_img.setAttribute('src','assets/images/logo.svg')
+    header_left_img.setAttribute('src','./frontend/assets/images/logo.svg')
     header_left.appendChild(header_left_img);
     header.appendChild(header_left);
 }
