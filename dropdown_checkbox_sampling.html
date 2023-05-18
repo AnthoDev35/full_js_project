@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown>input {
+			border: 1px solid #ccc;
+			color: black;
+			border-radius: 2px;
+    		padding: 5px;
+		}
+		.dropdown>input:focus-visible {
+			border: 1px solid blue;
+			color: black;
+			border-radius: 2px;
+		}
+		.dropdown-toggle {
+			padding: 10px;
+			background-color: #f1f1f1;
+			border: none;
+			cursor: pointer;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			min-width: 150px;
+			height: 100px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			padding: 10px;
+    		overflow: auto;
+		}
+		.dropdown-content label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		.dropdown-content input[type="checkbox"] {
+			margin-right: 5px;
+		}
+		button{
+			padding: 5px 10px;
+			background-color: #8a8a8a;
+			color: black;
+			border-radius: 5px;
+		}
+		button:hover{
+			background-color: #ccc;
+			color: darkblue;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="dropdown">
+		<input type="text" class="search-input" oninput="filterOptions()" placeholder="Rechercher...">
+		<div class="dropdown-content">
+			<label><input type="checkbox" value="option1"> Option 1</label>
+			<label><input type="checkbox" value="option2"> Option 2</label>
+			<label><input type="checkbox" value="option3"> Option 3</label>
+			<label><input type="checkbox" value="option4"> Option 4</label>
+			<label><input type="checkbox" value="option5"> Option 5</label>
+			<label><input type="checkbox" value="option6"> Option 6</label>
+		</div>
+		<button onclick="validateSelection()">Valider</button>
+	</div>
+
+	<script>
+		function filterOptions() {
+			const searchInput = document.querySelector('.search-input');
+			const filter = searchInput.value.toUpperCase();
+			const options = document.querySelectorAll('.dropdown-content label');
+			const dropdownContent = document.querySelector('.dropdown-content');
+			if (filter.length >= 1) {
+				options.forEach(function (option) {
+					const text = option.innerText.toUpperCase();
+					option.style.display = text.indexOf(filter) > -1 ? 'block' : 'none';
+				});
+				if(dropdownContent.style.display != 'block') dropdownContent.style.display = 'block';
+			}
+			else{
+				if(dropdownContent.style.display == 'block') dropdownContent.style.display = 'none';
+			}
+		}
+
+		function validateSelection() {
+			const selectOptions = document.querySelectorAll('.dropdown-content input[type="checkbox"]:checked');
+			if(selectOptions.length === 0) return console.log('no datas');
+			// Process the selected options
+			selectOptions.forEach(option=> {
+				console.log(option.value);
+			});
+		}
+	</script>
+</body>
+
+</html>
