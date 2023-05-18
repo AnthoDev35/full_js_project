@@ -2,6 +2,9 @@ import {get_request} from "./requests.js";
 import {get_page} from "./pages.js";
 const global_content = document.createElement('div');
 
+/**
+ * initialise le contenu
+ */
 export function init_content(){
     const global_container = document.getElementById('global-container');
     if(global_container){
