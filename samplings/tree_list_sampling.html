@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.tree {
+			list-style: none;
+			padding-left: 20px;
+		}
+
+		.tree li {
+			position: relative;
+		}
+
+		.tree li:before {
+			content: "+ ";
+			position: absolute;
+			left: -20px;
+		}
+
+		.tree li.open:before {
+			content: "- ";
+		}
+
+		.tree li:last-child:before {
+			display: none;
+		}
+
+		.icon {
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			background-image: url('icon.png');
+			/* Remplacez 'icon.png' par le chemin de votre icône */
+			background-size: cover;
+			position: absolute;
+			left: -40px;
+			top: 0;
+		}
+
+		.hide {
+			display: none;
+		}
+
+		.no-icon:before {
+			content: none;
+		}
+	</style>
+</head>
+
+<body>
+	<ul id="treeView" class="tree"></ul>
+
+	<script>
+		// Données initiales
+		const array = [
+			{ id: 1, name: "Groupe 1" },
+			{ id: 2, name: "Groupe 1 | Sous-groupe 1" },
+			{ id: 3, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1" },
+			{ id: 4, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP" },
+			{ id: 5, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1" },
+			{ id: 6, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 1" },
+			{ id: 7, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 2" },
+			{ id: 8, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 3" },
+			{ id: 9, name: "Groupe 2" },
+			{ id: 10, name: "Groupe 2 | Sous-groupe 2" },
+			{ id: 11, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2" },
+			{ id: 12, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP" },
+			{ id: 13, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2" },
+			{ id: 14, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 4" },
+			{ id: 15, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 5" },
+			{ id: 16, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 6" },
+			{ id: 17, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 7" },
+			{ id: 18, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 8" },
+			{ id: 19, name: "Groupe 3" },
+			{ id: 20, name: "Groupe 3 | Sous-groupe 3" }
+		];
+
+		// Créer l'arborescence
+		function createTreeView(array, parentElement) {
+			const treeView = document.getElementById(parentElement);
+
+			// Créer un objet pour stocker les enfants de chaque parent
+			const childrenMap = {};
+
+			array.forEach((item) => {
+				const parts = item.name.split(" | ");
+				const parentName = parts.slice(0, parts.length - 1).join(" | ");
+				const childName = parts[parts.length - 1];
+
+				if (!childrenMap[parentName]) {
+					childrenMap[parentName] = [];
+				}
+
+				childrenMap[parentName].push(childName);
+			});
+
+			// Fonction récursive pour créer les éléments enfants
+			function createChildren(parentName, parentElement) {
+				const children = childrenMap[parentName];
+
+				if (children && children.length > 0) {
+					const childList = document.createElement("ul");
+
+					children.forEach((childName, index) => {
+						const childListItem = document.createElement("li");
+						childListItem.textContent = childName;
+
+						// Ajoute la classe "open" pour les éléments avec des enfants
+						if (childrenMap[childName]) {
+							childListItem.classList.add("open");
+						}
+
+						// Ajoute un événement de clic pour replier/déplier l'arborescence
+						childListItem.addEventListener("click", (event) => {
+							event.stopPropagation();
+							toggleTree(childListItem);
+						});
+
+						childList.appendChild(childListItem);
+						createChildren(`${parentName} | ${childName}`, childListItem);
+					});
+
+					parentElement.appendChild(childList);
+				} else {
+					parentElement.classList.add("no-icon");
+				}
+			}
+
+			// Fonction pour replier/déplier l'arborescence
+			function toggleTree(item) {
+				const childList = item.querySelector("ul");
+				if (childList) {
+					childList.classList.toggle("hide");
+					item.classList.toggle("open");
+				}
+			}
+
+			// Créer les éléments racine
+			array.forEach((item) => {
+				if (!item.name.includes("|")) {
+					const listItem = document.createElement("li");
+					listItem.textContent = item.name;
+					listItem.classList.add("root");
+
+					// Ajoute un événement de clic pour replier/déplier l'arborescence
+					listItem.addEventListener("click", (event) => {
+						event.stopPropagation();
+						toggleTree(listItem);
+					});
+
+					treeView.appendChild(listItem);
+					createChildren(item.name, listItem);
+				}
+			});
+		}
+
+		createTreeView(array, "treeView");
+	</script>
+</body>
+
+</html>
