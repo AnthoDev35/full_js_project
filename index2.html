@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+.tree-container {
+  font-family: Arial, sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+li {
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  border-left: 1px solid #ccc;
+  height: calc(100% - 14px);
+}
+
+li:last-child:before {
+  border-left: none;
+}
+
+li:only-child:before {
+  display: none;
+}
+
+li.active:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-left: 2px solid #6c757d;
+  height: 100%;
+}
+
+span {
+  padding: 3px 8px;
+  background-color: #f8f9fa;
+  border-radius: 3px;
+}
+
+ul.active > li > ul {
+  display: block;
+}
+
+ul.active {
+  display: block;
+}
+
+
+  </style>
+</head>
+<body>
+  <div id="tree-container"></div>
+
+  <script>
+	
+
+let array = [
+    { id: 1, name: "Groupe 1" },
+    { id: 2, name: "Groupe 1 | Sous-groupe 1" },
+    { id: 3, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1" },
+    { id: 4, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP" },
+    { id: 5, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1" },
+    { id: 6, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 1" },
+    { id: 7, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 2" },
+    { id: 8, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 3" },
+    { id: 9, name: "Groupe 2" },
+    { id: 10, name: "Groupe 2 | Sous-groupe 2" },
+    { id: 11, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2" },
+    { id: 12, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP" },
+    { id: 13, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2" },
+    { id: 14, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 4" },
+    { id: 15, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 5" },
+    { id: 16, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 6" },
+    { id: 17, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 7" },
+    { id: 18, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 8" },
+    { id: 19, name: "Groupe 3" },
+    { id: 20, name: "Groupe 3 | Sous-groupe 3" },
+    { id: 21, name: "Groupe 3 | Sous-groupe 3 | BABOU" },
+    { id: 22, name: "Groupe 3 | Sous-groupe 3 | BABOU | Final-customer 9" },
+    { id: 23, name: "Groupe 3 | Sous-groupe 3 | BABOU | Final-customer 10" },
+    { id: 24, name: "Groupe 3 | Sous-groupe 3 | BABOU | Final-customer 11" },
+    { id: 25, name: "Groupe 3 | Sous-groupe 3 | BABOU | Final-customer 12" },
+    { id: 26, name: "Groupe 4" },
+    { id: 27, name: "Groupe 4 | TITOP" },
+    { id: 28, name: "Groupe 4 | TITOP | Final-customer 13" },
+    { id: 29, name: "Groupe 4 | TITOP | Final-customer 14" },
+    { id: 30, name: "Groupe 4 | TITOP | Final-customer 15" },
+    { id: 31, name: "Final-customer 16" },
+    { id: 32, name: "Final-customer 17" },
+    { id: 33, name: "Final-customer 18" },
+    { id: 34, name: "Final-customer 19" },
+    { id: 35, name: "Final-customer 20" }    
+  ];
+  
+  function generateTree(array) {
+  const tree = {};
+
+  array.forEach(item => {
+    const names = item.name.split(" | ");
+    let currentNode = tree;
+
+    names.forEach((name, index) => {
+      if (!currentNode[name]) {
+        currentNode[name] = { children: {} };
+      }
+      currentNode = currentNode[name].children;
+    });
+  });
+
+  return tree;
+}
+
+function createNestedList(tree, parentUl) {
+  for (const key in tree) {
+    const li = document.createElement("li");
+    const ul = document.createElement("ul");
+    const span = document.createElement("span");
+    span.textContent = key;
+    li.appendChild(span);
+    li.appendChild(ul);
+    parentUl.appendChild(li);
+
+    if (Object.keys(tree[key].children).length > 0) {
+      li.classList.add("clickable");
+      createNestedList(tree[key].children, ul);
+    }
+  }
+}
+
+function toggleNestedList(event) {
+  const element = event.target;
+  if (element.tagName === "SPAN" && element.parentNode.classList.contains("clickable")) {
+    element.parentNode.classList.toggle("active");
+  }
+}
+
+// Création de l'arborescence
+const tree = generateTree(array);
+
+// Création de la liste imbriquée
+const rootUl = document.createElement("ul");
+rootUl.classList.add('active')
+createNestedList(tree, rootUl);
+
+// Ajout de l'arborescence au document
+const container = document.getElementById("tree-container");
+container.appendChild(rootUl);
+
+// Ajout du gestionnaire d'événement pour le clic
+container.addEventListener("click", toggleNestedList);
+
+  </script>
+</body>
+</html>

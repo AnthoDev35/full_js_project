@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+	.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  background-color: #eee;
+  padding: 20px;
+}
+
+.item {
+  width: 100px;
+  height: 100px;
+  background-color: #4CAF50;
+  margin: 10px;
+}
+
+.droppable {
+  width: 300px;
+  height: 300px;
+  background-color: #f44336;
+  margin: 20px auto;
+}
+	</style>
+</head>
+
+<body><div class="container">
+	<div class="item draggable resizable"></div>
+	<div class="item draggable resizable"></div>
+	<div class="item draggable resizable"></div>
+  </div>
+  <div class="droppable"></div>
+	<script>
+	// Sélectionnez les éléments draggable et droppable
+const draggableElements = document.querySelectorAll('.draggable');
+const droppable = document.querySelector('.droppable');
+
+// Ajoutez des écouteurs d'événements pour le déplacement et le redimensionnement
+draggableElements.forEach(element => {
+  element.addEventListener('mousedown', startDrag);
+});
+
+let currentElement;
+let initialX;
+let initialY;
+let startWidth;
+let startHeight;
+
+// Fonction pour l'initialisation du déplacement
+function startDrag(e) {
+  currentElement = this;
+  initialX = e.clientX - currentElement.getBoundingClientRect().left;
+  initialY = e.clientY - currentElement.getBoundingClientRect().top;
+
+  window.addEventListener('mousemove', dragElement);
+  window.addEventListener('mouseup', stopDrag);
+  
+  // Empêcher le redimensionnement lors du déplacement
+  currentElement.style.pointerEvents = 'none';
+}
+
+// Fonction pour déplacer l'élément
+function dragElement(e) {
+  const x = e.clientX - initialX;
+  const y = e.clientY - initialY;
+
+  currentElement.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// Fonction pour arrêter le déplacement
+function stopDrag() {
+  window.removeEventListener('mousemove', dragElement);
+  window.removeEventListener('mouseup', stopDrag);
+  
+  // Réactiver les interactions de l'élément après le déplacement
+  currentElement.style.pointerEvents = 'auto';
+}
+
+// Ajoutez un écouteur d'événements pour le drag and drop
+droppable.addEventListener('drop', dropElement);
+droppable.addEventListener('dragover', allowDrop);
+
+// Fonction pour permettre le drop
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+// Fonction pour effectuer le drop
+function dropElement(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData("text/plain");
+  const droppedElement = document.getElementById(data);
+  this.appendChild(droppedElement);
+}
+
+// Ajoutez des écouteurs d'événements pour le redimensionnement
+draggableElements.forEach(element => {
+  element.addEventListener('mousedown', initResize);
+});
+
+// Fonction pour l'initialisation du redimensionnement
+function initResize(e) {
+  currentElement = this;
+  startWidth = parseFloat(getComputedStyle(currentElement, null).getPropertyValue('width'));
+  startHeight = parseFloat(getComputedStyle(currentElement, null).getPropertyValue('height'));
+  startX = e.clientX;
+  startY = e.clientY;
+  window.addEventListener('mousemove', doResize);
+  window.addEventListener('mouseup', stopResize);
+}
+
+// Fonction pour effectuer leredimensionnement
+function doResize(e) {
+const newWidth = startWidth + (e.clientX - startX);
+const newHeight = startHeight + (e.clientY - startY);
+
+currentElement.style.width = `${newWidth}px`;
+currentElement.style.height = `${newHeight}px`;
+}
+
+// Fonction pour arrêter le redimensionnement
+function stopResize() {
+window.removeEventListener('mousemove', doResize);
+window.removeEventListener('mouseup', stopResize);
+}
+	</script>
+</body>
+
+</html>
