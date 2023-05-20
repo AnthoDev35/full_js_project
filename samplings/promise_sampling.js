@@ -30,9 +30,9 @@ class HttpRequest {
     }
 }
 
-// Exemple d'utilisation
-const apiUrl = 'https://api.example.com/data';
-HttpRequest.makeRequest(apiUrl, 'GET')
+    // Exemple d'utilisation
+    const apiUrl = 'https://api.example.com/data';
+    HttpRequest.makeRequest(apiUrl, 'GET')
     .then(response => {
         console.log(response);
         // Faites quelque chose avec la réponse
