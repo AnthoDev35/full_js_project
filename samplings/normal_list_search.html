@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.tree {
+			list-style: none;
+			padding-left: 20px;
+		}
+
+		.tree li {
+			position: relative;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="">
+		<input type="text" id="input-search" />
+	</div>
+	<ul id="treeView" class="tree"></ul>
+
+	<script>
+		// Données initiales
+		const array = [
+			{ id: 1, name: "Groupe 1" },
+			{ id: 2, name: "Groupe 1 | Sous-groupe 1" },
+			{ id: 3, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1" },
+			{ id: 4, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP" },
+			{ id: 5, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1" },
+			{ id: 6, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 1" },
+			{ id: 7, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 2" },
+			{ id: 8, name: "Groupe 1 | Sous-groupe 1 | Sous-sous-groupe 1 | STEP | STEP-groupe 1 | Final-customer 3" },
+			{ id: 9, name: "Groupe 2" },
+			{ id: 10, name: "Groupe 2 | Sous-groupe 2" },
+			{ id: 11, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2" },
+			{ id: 12, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP" },
+			{ id: 13, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2" },
+			{ id: 14, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 4" },
+			{ id: 15, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 5" },
+			{ id: 16, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 6" },
+			{ id: 17, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 7" },
+			{ id: 18, name: "Groupe 2 | Sous-groupe 2 | Sous-sous-groupe 2 | AEP | STEP-groupe 2 | Final-customer 8" },
+			{ id: 19, name: "Groupe 3" },
+			{ id: 20, name: "Groupe 3 | Sous-groupe 3" }
+		];
+
+		// Créer l'arborescence
+		function createTreeView(array, parentElement) {
+			const treeView = document.getElementById(parentElement);
+
+			// Créer un objet pour stocker les enfants de chaque parent
+			const childrenMap = {};
+
+			// Fonction récursive pour créer les éléments enfants
+			function createChildren(parentName, parentElement) {
+				const children = childrenMap[parentName];
+
+				if (children && children.length > 0) {
+					const childList = document.createElement("ul");
+
+					children.forEach((childName, index) => {
+						const childListItem = document.createElement("li");
+						childListItem.textContent = childName;
+
+						// Ajoute la classe "open" pour les éléments avec des enfants
+						if (childrenMap[childName]) {
+							childListItem.classList.add("open");
+						}
+
+						// Ajoute un événement de clic pour replier/déplier l'arborescence
+						childListItem.addEventListener("click", (event) => {
+							event.stopPropagation();
+							toggleTree(childListItem);
+						});
+
+						childList.appendChild(childListItem);
+						createChildren(`${parentName} | ${childName}`, childListItem);
+					});
+
+					parentElement.appendChild(childList);
+				}
+			}
+
+			// Fonction pour replier/déplier l'arborescence
+			function toggleTree(item) {
+				const childList = item.querySelector("ul");
+				if (childList) {
+					childList.classList.toggle("hide");
+					item.classList.toggle("open");
+				}
+			}
+
+			// Créer les éléments racine
+			array.forEach((item) => {
+				const listItem = document.createElement("li");
+				listItem.textContent = item.name;
+
+				// Ajoute un événement de clic pour replier/déplier l'arborescence
+				listItem.addEventListener("click", (event) => {
+					event.stopPropagation();
+					toggleTree(listItem);
+				});
+
+				treeView.appendChild(listItem);
+				createChildren(item.name, listItem);
+			});
+		}
+
+		createTreeView(array, "treeView");
+
+		function searchKeyword(keyword) {
+			const treeView = document.getElementById("treeView");
+			const items = treeView.getElementsByTagName("li");
+
+			const searchWords = keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(" "); // Divise la recherche en mots individuels en minuscules
+
+			for (var i = 0; i < items.length; i++) {
+				const item = items[i];
+				let text = item.innerText || item.textContent;
+				text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+				// Divise le texte en segments à l'aide du caractère de séparation "|"
+				const segments = text.split(" | ");
+
+				const isMatch = segments.some(function (segment) {
+					let cleanedText = segment.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+					// Remplace le caractère de séparation "|" par un espace lors de la comparaison
+					cleanedText = cleanedText.replace(/\|/g, " ");
+
+					return searchWords.every(function (word) {
+						return cleanedText.indexOf(word) !== -1; // Vérifie si chaque mot est contenu dans le segment
+					});
+				});
+
+				if (isMatch) {
+					item.style.backgroundColor = "yellow";
+				} else {
+					item.style.backgroundColor = "";
+				}
+			}
+		}
+
+		const input_search = document.getElementById('input-search');
+		if (input_search) {
+			input_search.addEventListener('keyup', function (event) {
+				event.preventDefault();
+				setTimeout(() => {
+					var keyword = input_search.value;
+					searchKeyword(keyword);
+				}, 500);
+			});
+		}
+	</script>
+</body>
+
+</html>
