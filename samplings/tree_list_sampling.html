@@ -49,6 +49,9 @@
 </head>
 
 <body>
+	<div class="">
+		<input type="text" id="input-search" />
+	</div>
 	<ul id="treeView" class="tree"></ul>
 
 	<script>
@@ -156,6 +159,33 @@
 		}
 
 		createTreeView(array, "treeView");
+		
+		function searchKeyword(keyword) {
+			var treeView = document.getElementById("treeView");
+			var items = treeView.getElementsByTagName("li");
+
+			for (var i = 0; i < items.length; i++) {
+				var item = items[i];
+				var text = item.innerText || item.textContent;
+
+				if (text.includes(keyword)) {
+					item.style.backgroundColor = "yellow"; // Met en surbrillance l'élément correspondant
+				} else {
+					item.style.backgroundColor = ""; // Réinitialise la couleur de fond des autres éléments
+				}
+			}
+		}
+
+		const input_search = document.getElementById('input-search');
+		if (input_search) {
+			input_search.addEventListener('keyup', function (event) {
+				event.preventDefault();
+				setTimeout(() => {
+					var keyword = input_search.value.toLowerCase(); // Convertit la recherche en minuscules pour une correspondance insensible à la casse
+					searchKeyword(keyword);
+				}, 500);
+			});
+		}
 	</script>
 </body>
 
