@@ -11,40 +11,6 @@
 		.tree li {
 			position: relative;
 		}
-
-		.tree li:before {
-			content: "+ ";
-			position: absolute;
-			left: -20px;
-		}
-
-		.tree li.open:before {
-			content: "- ";
-		}
-
-		.tree li:last-child:before {
-			display: none;
-		}
-
-		.icon {
-			display: inline-block;
-			width: 16px;
-			height: 16px;
-			background-image: url('icon.png');
-			/* Remplacez 'icon.png' par le chemin de votre icône */
-			background-size: cover;
-			position: absolute;
-			left: -40px;
-			top: 0;
-		}
-
-		.hide {
-			display: none;
-		}
-
-		.no-icon:before {
-			content: none;
-		}
 	</style>
 </head>
 
@@ -86,18 +52,6 @@
 			// Créer un objet pour stocker les enfants de chaque parent
 			const childrenMap = {};
 
-			array.forEach((item) => {
-				const parts = item.name.split(" | ");
-				const parentName = parts.slice(0, parts.length - 1).join(" | ");
-				const childName = parts[parts.length - 1];
-
-				if (!childrenMap[parentName]) {
-					childrenMap[parentName] = [];
-				}
-
-				childrenMap[parentName].push(childName);
-			});
-
 			// Fonction récursive pour créer les éléments enfants
 			function createChildren(parentName, parentElement) {
 				const children = childrenMap[parentName];
@@ -125,8 +79,6 @@
 					});
 
 					parentElement.appendChild(childList);
-				} else {
-					parentElement.classList.add("no-icon");
 				}
 			}
 
@@ -141,37 +93,50 @@
 
 			// Créer les éléments racine
 			array.forEach((item) => {
-				if (!item.name.includes("|")) {
-					const listItem = document.createElement("li");
-					listItem.textContent = item.name;
-					listItem.classList.add("root");
+				const listItem = document.createElement("li");
+				listItem.textContent = item.name;
 
-					// Ajoute un événement de clic pour replier/déplier l'arborescence
-					listItem.addEventListener("click", (event) => {
-						event.stopPropagation();
-						toggleTree(listItem);
-					});
+				// Ajoute un événement de clic pour replier/déplier l'arborescence
+				listItem.addEventListener("click", (event) => {
+					event.stopPropagation();
+					toggleTree(listItem);
+				});
 
-					treeView.appendChild(listItem);
-					createChildren(item.name, listItem);
-				}
+				treeView.appendChild(listItem);
+				createChildren(item.name, listItem);
 			});
 		}
 
 		createTreeView(array, "treeView");
-		
+
 		function searchKeyword(keyword) {
-			var treeView = document.getElementById("treeView");
-			var items = treeView.getElementsByTagName("li");
+			const treeView = document.getElementById("treeView");
+			const items = treeView.getElementsByTagName("li");
+
+			const searchWords = keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().split(" "); // Divise la recherche en mots individuels en minuscules
 
 			for (var i = 0; i < items.length; i++) {
-				var item = items[i];
-				var text = item.innerText || item.textContent;
+				const item = items[i];
+				let text = item.innerText || item.textContent;
+				text = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+				// Divise le texte en segments à l'aide du caractère de séparation "|"
+				const segments = text.split(" | ");
 
-				if (text.includes(keyword)) {
-					item.style.backgroundColor = "yellow"; // Met en surbrillance l'élément correspondant
+				const isMatch = segments.some(function (segment) {
+					let cleanedText = segment.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+					// Remplace le caractère de séparation "|" par un espace lors de la comparaison
+					cleanedText = cleanedText.replace(/\|/g, " ");
+
+					return searchWords.every(function (word) {
+						return cleanedText.indexOf(word) !== -1; // Vérifie si chaque mot est contenu dans le segment
+					});
+				});
+
+				if (isMatch) {
+					item.style.backgroundColor = "yellow";
 				} else {
-					item.style.backgroundColor = ""; // Réinitialise la couleur de fond des autres éléments
+					item.style.backgroundColor = "";
 				}
 			}
 		}
@@ -181,7 +146,7 @@
 			input_search.addEventListener('keyup', function (event) {
 				event.preventDefault();
 				setTimeout(() => {
-					var keyword = input_search.value.toLowerCase(); // Convertit la recherche en minuscules pour une correspondance insensible à la casse
+					var keyword = input_search.value;
 					searchKeyword(keyword);
 				}, 500);
 			});
