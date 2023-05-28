@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Carrousel d'images</title>
+    <style>
+        .carousel {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+        }
+
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            transition: all .5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-description {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: white;
+            background: #00000067;
+            border-top: 1px solid #fff;
+        }
+
+        .carousel-description h4{
+            font-size: 16px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .carousel-description p{
+            font-size: 12px;
+            padding: 0 10px 10px;
+            margin: 0;
+        }
+
+        .carousel-navigation {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 1;
+        }
+        .carousel-navigation button{
+            background: none;
+            border: none;
+            color: rgb(255, 255, 255);
+            font-size: 30px;
+            cursor: pointer;
+            transition: all .2s ease-in-out;
+        }
+        .carousel-navigation button:hover{
+            font-size: 34px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carousel" id="carousel">
+        <div class="slides-container" id="slidesContainer"></div>
+        <div class="carousel-navigation">
+            <button onclick="carousel.prevSlide()">&lt;</button>
+            <button onclick="carousel.nextSlide()">&gt;</button>
+        </div>
+    </div>
+
+    <script>
+        class Carousel {
+            constructor(images) {
+                this.images = images;
+                this.currentIndex = 0;
+                this.carouselElement = document.getElementById('carousel');
+                this.slidesContainer = document.getElementById('slidesContainer');
+                this.slides = [];
+                this.renderSlides();
+                this.showSlide(this.currentIndex);
+            }
+
+            renderSlides() {
+                this.images.forEach((image, index) => {
+                    const slide = this.createSlide(image, index);
+                    this.slidesContainer.appendChild(slide);
+                    this.slides.push(slide);
+                });
+            }
+
+            createSlide(image, index) {
+                const slide = document.createElement('div');
+                slide.className = 'slide';
+                const slide_description = document.createElement('div');
+                slide_description.className = 'carousel-description';
+                const description_h4 = document.createElement('h4');
+                description_h4.innerText = image.title;
+                const description_p = document.createElement('p');
+                description_p.innerText = image.description;
+                slide_description.append(description_h4,description_p);
+                slide.append(slide_description);
+                const img = new Image();
+                img.className = 'carousel-image';
+                img.alt = image.description;
+                img.addEventListener('load', () => {
+                    slide.appendChild(img);
+                });
+                img.src = image.url;
+                return slide;
+            }
+
+            showSlide(index) {
+                this.slides.forEach((slide, slideIndex) => {
+                    if (slideIndex === index) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+            }
+
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                this.showSlide(this.currentIndex);
+            }
+
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                this.showSlide(this.currentIndex);
+            }
+        }
+
+        const images = [
+            { id: 1, title: 'Image 1', description: 'Description Image 1', url: 'images/image1.jpg' },
+            { id: 2, title: 'Image 2', description: 'Description Image 2', url: 'images/image2.jpg' },
+            { id: 3, title: 'Image 3', description: 'Description Image 3', url: 'images/image3.jpg' },
+            { id: 4, title: 'Image 4', description: 'Description Image 4', url: 'images/image4.jpg' },
+            { id: 5, title: 'Image 5', description: 'Description Image 5', url: 'images/image5.jpg' }
+        ];
+
+        const carousel = new Carousel(images);
+        setInterval(()=>{
+            carousel.nextSlide();
+        }, 3000);
+    </script>
+</body>
+
+</html>
