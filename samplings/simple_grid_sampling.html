@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .grid {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      border: 1px solid #ccc;
+      overflow: auto;
+    }
+
+    .grid-item {
+      position: absolute;
+      background-color: #f0f0f0;
+      border: 1px solid #999;
+      cursor: move;
+    }
+
+    .resize-handle {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: #999;
+      bottom: 0;
+      right: 0;
+      cursor: se-resize;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid">
+    <div class="grid-item" style="top: 100px; left: 100px; width: 200px; height: 150px;">
+      <div class="resize-handle"></div>
+    </div>
+    <div class="grid-item" style="top: 200px; left: 300px; width: 150px; height: 100px;">
+      <div class="resize-handle"></div>
+    </div>
+    <div class="grid-item" style="top: 50px; left: 400px; width: 180px; height: 120px;">
+      <div class="resize-handle"></div>
+    </div>
+  </div>
+
+  <script>
+    let draggingItem = null;
+    let resizeHandle = null;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    document.addEventListener('mousedown', handleDragStart);
+    document.addEventListener('mousemove', handleDragMove);
+    document.addEventListener('mouseup', handleDragEnd);
+
+    function handleDragStart(event) {
+      if (event.target.classList.contains('grid-item')) {
+        draggingItem = event.target;
+        offsetX = event.clientX - draggingItem.offsetLeft;
+        offsetY = event.clientY - draggingItem.offsetTop;
+      } else if (event.target.classList.contains('resize-handle')) {
+        resizeHandle = event.target;
+      }
+    }
+
+    function handleDragMove(event) {
+      if (draggingItem) {
+        const containerRect = document.querySelector('.grid').getBoundingClientRect();
+        const containerScrollLeft = document.querySelector('.grid').scrollLeft;
+        const containerScrollTop = document.querySelector('.grid').scrollTop;
+
+        const left = event.clientX - containerRect.left + containerScrollLeft - offsetX;
+        const top = event.clientY - containerRect.top + containerScrollTop - offsetY;
+
+        draggingItem.style.left = `${left}px`;
+        draggingItem.style.top = `${top}px`;
+      } else if (resizeHandle) {
+        const containerRect = document.querySelector('.grid').getBoundingClientRect();
+        const containerScrollLeft = document.querySelector('.grid').scrollLeft;
+        const containerScrollTop = document.querySelector('.grid').scrollTop;
+
+        const item = resizeHandle.parentElement;
+        const width = event.clientX - containerRect.left + containerScrollLeft - item.offsetLeft;
+        const height = event.clientY - containerRect.top + containerScrollTop - item.offsetTop;
+
+        item.style.width = `${width}px`;
+        item.style.height = `${height}px`;
+      }
+    }
+
+    function handleDragEnd(event) {
+      draggingItem = null;
+      resizeHandle = null;
+    }
+  </script>
+</body>
+</html>
