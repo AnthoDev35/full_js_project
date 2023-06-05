@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<!-- On commence toujours une page html par "<!DOCTYPE html>" qui indique au navigateur que cette page contient du HTML
+Ensuite on commence notre code avec la balise "<html></html>";
+Vient ensuite 2 balises standard qui sont : 
+la balise "<head></head>" qui contient divers autres balises :
+	"meta" utile pour le référencement SEO,
+	"title" qui indique le titre de la page que vous consultez,
+	"link qui indique l'emplacement des fichiers CSS ou des divers plugins"
+la balise "<body></body>" qui est le corps de la page
+-->
+<head>
+	<title>Mon exemple de page</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+	<!-- la balise header est maintenant utilisé pour créer les barre de navigation, qu'elles soient verticales ou horizontales-->
+	<header>
+		<!-- la balise nav est une balise exclusivement pour les barres de navigations-->
+		<nav>
+			<!-- les div sont les "divisers" elles sont les balises les plus utilisées puisqu'elles sont faites pour diviser les différents élements du DOM
+			(Le DOM est la totalité de la page chargé dans le navigateur)-->
+			<div class="logo">
+				<!-- la balise "img" ne ce ferme pas tout comme les balises "input, link" -->
+				<img src="logo.png" alt="Logo">
+			</div>
+			<!-- la balise "ul" peut etre utilisé pour les menus principalement à ne pas confondre avec les balises "tables" -->
+			<ul class="nav-links">
+				<!-- les balises ul sont forcéments liés à des balises "li" qui sont souvent utilisé avbec des balise de lien "a"-->
+				<li><a href="#">Accueil</a></li>
+				<li><a href="#">À propos</a></li>
+				<li><a href="#">Services</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+<!-- les balises de sections sont utiles pour différencier chaques partie de votre page web, une section désigne une partie de la page qui sera plus facilement lisible pour les robots référenceurs -->
+	<section>
+		<!-- les balise <h1><h2><h3><h4><h5><h6> sont utilisés pourt les titres du plus grand au plus petit de 1 à 6 1 étant de 24px-->
+		<h2>Titre de la section</h2>
+		<!-- la balise "p" désigne un paragraphe, utilisés principalement pour les grandes description qui sont utilisés par les robots pour le référencement-->
+		<p>Description de la section.</p>
+		<!-- dans la balise img on retrouve aussi un "tag" qui s'appel "alt" qui est utilisé par les robots pour le référencement,
+			il y a aussi d'autres tags utiles comme le "title" qui va faire apparettre le texte contenu dans ce tag au survol de la souris
+			ou "value" présent dans les inputs qui va préremplir l'input avec la valeur renseigné dans ce tag, 
+			ou encore, "placeholder" présent aussi dans les inputs qui va mettre son contenu en text de fond dans l'input-->
+		<img src="image-1.jpg" alt="Ma photo">
+	</section>
+	<!-- la plupare des balises html ce fermes sauf quelques exeption comme "img" "input" dans le body et "link" ddans le head-->
+	<!-- la balise "footer" désigne le bas de la page, elle est aussi utilisé dans le référencement, c'est pour celà qu'elle est très importante
+	beaucoup de sites mettent les mots clés dans le footer pour un référencement plus poussé-->
+	<footer>
+		<p>Mon Footer</p>
+	</footer>
+</body>
+
+</html>

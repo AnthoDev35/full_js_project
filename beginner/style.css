@@ -1,0 +1,48 @@
+/* style.css */
+* {
+	/* Le margin est la marge exterieur : margin: haut, droit ,bas, gauche ou
+	une seule valeur met les 4 valeurs à la dimention saisie en px*/
+	margin: 0;
+	/* Le padding est la marge interieur elle s'utilise de la même manière que le "margin" */
+	padding: 0; 
+}
+
+/* "header"  reprséente une balise / 
+si il y a un point devant (.header) elle représenterais une classe si elle aurait un "#header" elle serait un ID.
+header représente l'adresse de la balise pour y attribuer les différents réglages css*/
+header {
+	/* Le padding est la marge interieur elle s'utilise de la même manière que le "margin" */
+	background-color: #f2f2f2; /* Le background-color ou background est utilisé pour définir un fond qui prendra toute cette balise
+	(Attention aux marges "margin" qui ne seront pas de cette couleur vue qu'elles sont des marges exterieurs
+	les marges "padding" sont des marges interieurs donc elles seront de cette couleur*/
+}
+
+/* nav représente la balise "nav"*/
+nav {
+	display: flex; /*le display flex est l'affichage le plus utilisé puisqu'il permet d'aligner facvilement les formulaires
+	il est lié aux option si-dessous mais aussi d'autres (voir avec l'inspecteur chrome)*/
+	justify-content: space-between;
+	align-items: center;
+}
+
+/* .logo représente la classe ".logo qui envveloppe la balise "img"
+dans ce cas on configure la balise "img" mais en indiquant que la balise "img"
+que l'on souhaite configurer est seulement dans la balise "div" qui contient la classe "logo".*/
+.logo img {
+	width: 100px; /* tout simplement la taille en largeur de la balise img liée à cette classe*/
+}
+
+/* .nav-links représente la balise div qui contient la classe "nav-link" qui contient toutes les balises "li" */
+.nav-links li {
+	display: inline-block; /* le display représente le style d'affichage pour cette balise liée à cette classe*/
+	margin-right: 10px; /* ici on attribue seulement le margin-right pour mettre une marge exterieur droite de 10px */
+}
+
+/* .nav-links représente la balise div qui contient la classe "nav-link" qui contient toutes les balises "li"
+et la balise "a" qui est principalement utiliser en guise de lien entre les pages <a href="lien">titre du lien</a> */
+
+.nav-links li a {
+	text-decoration: none; /*text-decoration est utilisé pour entre-autre mettre des effets au texte, notament du sous-lignage
+	dans notre cas on supprime le sous-lignage qui y est d'origine dans tous les navigateurs */
+	color: #333; /* color représente la couleur du texte seulement */
+}
