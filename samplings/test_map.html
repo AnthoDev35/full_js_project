@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="vendor/leaflet/leaflet.draw.css" />
+    <style>
+        .leaflet-popup {
+            width: 200px;
+        }
+        /*Remove leaflet copyright*/
+        .leaflet-right{ 
+            display:none;
+        }
+        .leaflet-popup-content-wrapper {
+            padding: 0 1px 1px 0;
+        }
+        .leaflet-popup-content {
+            margin: 0 0 10px;
+        }
+        .leaflet-popup-content .header {
+            margin: 0;
+            padding: 5px 10px;
+            background-color: #0052a3;
+            color: #ffffff;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-size: 13px;
+        }
+        .leaflet-popup-content .content {
+            padding: 5px 10px;
+            font-size: 11px;
+        }
+        .leaflet-popup-content .content .line {
+            padding: 5px;
+        }
+        .leaflet-popup-content .content .line input[type="color"] {
+            padding: 0;
+            border: none;
+            width: 25px;
+        }
+        .leaflet-popup-content p {
+            margin: 0;
+            padding: 5px;
+            font-size: 11px;
+        }
+        .leaflet-popup-close-button span {
+            color: #fff;
+        }
+
+    </style>
+    <script src="vendor/leaflet/leaflet.js"></script>
+    <script src="vendor/leaflet/leaflet.draw.js"></script>
+</head>
+
+<body>
+    <div id="map" style="height: 800px;"></div>
+
+    <script>
+        var map = L.map('map').setView([48.08, -2.76], 9);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18,
+        }).addTo(map);
+
+        // Charger le fichier GeoJSON
+        fetch('vendor/datas/test.geojson')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                // Définir les styles pour chaque ville
+                const styleMappings = {
+                    'Brest': { fillColor: '#ff0000', color: '#910d0d', weight: 2 },
+                    'Rennes': { fillColor: '#00ff00', color: '#0b750b', weight: 2 },
+                    'Quimper': { fillColor: '#0000ff', color: '#06068c', weight: 2 },
+                    'Vannes': { fillColor: '#ffff00', color: '#6e6e04', weight: 2 }
+                };
+
+                // Ajouter les données GeoJSON à la carte avec les styles spécifiques et la popup
+                L.geoJSON(data, {
+                    style: function (feature) {
+                        const name = feature.properties.name;
+                        return styleMappings[name];
+                    },
+                    onEachFeature: function (feature, layer) {
+                        const name = feature.properties.name;
+                        const popupContent = `<div class="header">${name}</div>
+                        <p>Bienvenue à ${name} !</p>`;
+                        layer.bindPopup(popupContent);
+                    }
+                }).addTo(map);
+
+                // Charger le fichier GeoJSON
+                fetch('vendor/datas/marker.geojson')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        const iconMappings = {
+                            'Brest': L.icon({ iconUrl: 'vendor/leaflet/images/marker-icon-red.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34] }),
+                            'Rennes': L.icon({ iconUrl: 'vendor/leaflet/images/marker-icon-green.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34] }),
+                            'Quimper': L.icon({ iconUrl: 'vendor/leaflet/images/marker-icon-orange.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34] }),
+                            'Vannes': L.icon({ iconUrl: 'vendor/leaflet/images/marker-icon-pure-blue.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34] })
+                        };
+
+                        // Ajouter les données GeoJSON à la carte avec les icônes personnalisées
+                        L.geoJSON(data, {
+                            pointToLayer: function (feature, latlng) {
+                                const name = feature.properties.name;
+                                const icon = iconMappings[name] || L.icon({ iconUrl: 'default-icon.png', iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34] });
+
+                                // Créer le marqueur avec l'icône personnalisée
+                                const marker = L.marker(latlng, { icon: icon });
+
+                                return marker;
+                            },
+                            onEachFeature: function (feature, layer) {
+                                const name = feature.properties.name;
+                                const popupContent = `<div class="header">${name}</div>
+                                <p>Bienvenue à ${name} !</p>`;
+                                layer.bindPopup(popupContent);
+                            }
+                        }).addTo(map);
+
+                    });
+                // Ajuster la vue de la carte pour afficher tous les éléments du GeoJSON
+                map.fitBounds(L.geoJSON(data).getBounds());
+            });
+
+
+        // Initialize the FeatureGroup to store editable layers
+        const drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        const drawControl = new L.Control.Draw({
+            draw: {
+                polygon: true, // Activer le dessin des polygones
+                circle: false,
+                circlemarker: false,
+                marker: false,
+                polyline: false,
+                rectangle: false
+            },
+            edit: false
+        });
+
+        map.addControl(drawControl);
+
+        let items; // Déclaration de la variable globale
+
+        // Variable pour stocker l'état du dessin
+        let drawing = false;
+        
+        // Événement lorsque le dessin commence
+        map.on('draw:drawstart', function () {
+            drawing = true;
+        });
+
+        // Événement lorsque le dessin se termine
+        map.on('draw:drawstop', function () {
+            drawing = false;
+        });
+
+        map.on('draw:created', function (e) {
+            const layer = e.layer;
+            drawnItems.addLayer(layer);
+
+            // Créer le contenu HTML de la popup avec des inputs personnalisés
+            const popupContent = `
+                <div class="header">Ma popup personnalisée</div>
+                    <div class="content">
+                    <div class="line">Nom: <input type="text" id="nameInput" placeholder="Nom"></div>
+                    <div class="line">Couleur de remplissage: <input type="color" id="fillColorInput" value="#ff0000"></div>
+                    <div class="line">Couleur des bordures: <input type="color" id="borderColorInput" value="#0000ff"></div>
+                    <div class="line">Épaisseur des bordures: <input type="number" id="borderWidthInput" value="2"></div>
+                    <button onclick="appliquerStyle()">Appliquer</button>
+                    </div>
+                `;
+            // Ajouter une popup à la couche
+            layer.bindPopup(popupContent).openPopup();
+
+            // Assigner la couche à la variable globale
+            drawnItems.eachLayer(function (layer) {
+                items = layer;
+            });
+
+        });
+
+        let popup;
+        // Événement de clic sur la carte
+        map.on('click', function (e) {
+            if (!drawing) {
+                const markerLatLng = e.latlng;
+
+                // Créer une popup personnalisée
+                const popupContent = `<div class="header">Ma popup personnalisée</div>
+                    <div class="content">
+                    <div class="line">Souhaitez-vous ajouter un marker sur la carte?</div>
+                    <div class="line">Nom : <input type="text" id="nameInput"/></div>
+                    
+                    <div class="line">Couleur du marqueur :
+                        <select id="colorSelect">
+                        <option value="red">Rouge</option>
+                        <option value="pure-blue">Bleu</option>
+                        <option value="green">Vert</option>
+                        <option value="orange">Orange</option>
+                        </select>
+                    </div>
+                    <button onclick="addMarker()">Oui</button>
+                </div>`;
+                popup = L.popup().setLatLng(markerLatLng).setContent(popupContent).openOn(map);
+            }
+        });
+
+        // Fonction pour ajouter le marqueur à la carte
+        function addMarker() {
+            // Récupérer les coordonnées du marqueur
+            const markerLatLng = popup.getLatLng();
+
+            // Récupérer la couleur sélectionnée dans le sélecteur
+            const colorSelect = document.getElementById('colorSelect');
+            const selectedColor = colorSelect.value;
+
+            // Créer un marqueur et l'ajouter à la carte
+            const marker = L.marker(markerLatLng, { icon: coloredIcon(selectedColor) }).addTo(map);
+
+            const name = document.getElementById('nameInput').value;
+            // Créer un objet avec les données du marqueur
+            const markerData = {
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [markerLatLng.lng, markerLatLng.lat]
+                },
+                properties: {
+                    name: name
+                }
+            };
+
+            // Convertir les données du marqueur en GeoJSON
+            const geojson = JSON.stringify(markerData);
+
+            // Afficher le GeoJSON dans la console
+            console.log(geojson);
+
+            map.closePopup();
+        }
+
+        // Fonction pour créer une icône de marqueur colorée
+        function coloredIcon(color) {
+            return L.icon({
+                iconUrl: 'vendor/leaflet/images/marker-icon-' + color + '.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+                shadowSize: [41, 41]
+            });
+        }
+        function appliquerStyle() {
+
+            const name = document.getElementById('nameInput').value;
+            const fillColor = document.getElementById('fillColorInput').value;
+            const borderColor = document.getElementById('borderColorInput').value;
+            const borderWidth = document.getElementById('borderWidthInput').value;
+
+            // Appliquer le style personnalisé à la couche de la forme
+            items.setStyle({
+                fillColor: fillColor,
+                color: borderColor,
+                weight: borderWidth,
+                opacity: 1,
+                fillOpacity: 0.5,
+                name: name
+            });
+
+            // Fermer la popup associée à la couche
+            items.closePopup();
+            saveForm();
+        }
+
+
+        function saveForm() {
+            const layer = drawnItems.getLayers()[0]; // Supposons que vous travaillez uniquement avec une seule forme à la fois
+            if (layer) {
+                const points = layer.getLatLngs();
+                const style = layer.options;
+
+                const geojson = layer.toGeoJSON();
+
+                // Effectuer les opérations d'enregistrement dans votre base de données ou autre système de stockage
+                console.log('Enregistrer les points:', geojson.geometry.coordinates);
+
+                // Enregistrer les points et le style dans votre base de données ou autre système de stockage
+                console.log('Points:', points);
+                console.log('Style:', style);
+
+                layer.closePopup();
+            }
+        }
+    </script>
+</body>
+
+</html>
