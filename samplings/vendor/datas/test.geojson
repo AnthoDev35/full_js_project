@@ -1,0 +1,81 @@
+
+
+
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Brest"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-4.525, 48.383],
+              [-4.501, 48.383],
+              [-4.501, 48.398],
+              [-4.525, 48.398],
+              [-4.525, 48.383]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Rennes"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-1.71, 48.102],
+              [-1.69, 48.102],
+              [-1.69, 48.116],
+              [-1.71, 48.116],
+              [-1.71, 48.102]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Quimper"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-4.12, 47.991],
+              [-4.09, 47.991],
+              [-4.09, 48.008],
+              [-4.12, 48.008],
+              [-4.12, 47.991]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "name": "Vannes"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-2.759, 47.647],
+              [-2.735, 47.647],
+              [-2.735, 47.663],
+              [-2.759, 47.663],
+              [-2.759, 47.647]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+  
