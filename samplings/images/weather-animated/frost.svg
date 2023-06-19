@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- (c) ammap.com | SVG weather icons -->
+
+<svg
+   width="140"
+   height="124"
+   version="1.1"
+   id="svg2456"
+   sodipodi:docname="frost.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2458"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.1796875"
+     inkscape:cx="151.16846"
+     inkscape:cy="52.759857"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2456" />
+  <defs
+     id="defs2440">
+    <filter
+       id="blur"
+       x="-0.24117647"
+       y="-0.23428571"
+       width="1.4823529"
+       height="1.5828571">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="3"
+         id="feGaussianBlur2423" />
+      <feOffset
+         dx="0"
+         dy="4"
+         result="offsetblur"
+         id="feOffset2425" />
+      <feComponentTransfer
+         id="feComponentTransfer2429">
+        <feFuncA
+           slope="0.05"
+           type="linear"
+           id="feFuncA2427" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge2435">
+        <feMergeNode
+           id="feMergeNode2431" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode2433" />
+      </feMerge>
+    </filter>
+    <style
+       type="text/css"
+       id="style2438"><![CDATA[
+      /*
+** FROST
+*/
+      @keyframes am-weather-frost {
+        0% {
+          -webkit-transform: translate(0.0px, 0.0px);
+          -moz-transform: translate(0.0px, 0.0px);
+          -ms-transform: translate(0.0px, 0.0px);
+          transform: translate(0.0px, 0.0px);
+        }
+
+        1% {
+          -webkit-transform: translate(0.3px, 0.0px);
+          -moz-transform: translate(0.3px, 0.0px);
+          -ms-transform: translate(0.3px, 0.0px);
+          transform: translate(0.3px, 0.0px);
+        }
+
+        3% {
+          -webkit-transform: translate(-0.3px, 0.0px);
+          -moz-transform: translate(-0.3px, 0.0px);
+          -ms-transform: translate(-0.3px, 0.0px);
+          transform: translate(-0.3px, 0.0px);
+        }
+
+        5% {
+          -webkit-transform: translate(0.3px, 0.0px);
+          -moz-transform: translate(0.3px, 0.0px);
+          -ms-transform: translate(0.3px, 0.0px);
+          transform: translate(0.3px, 0.0px);
+        }
+
+        7% {
+          -webkit-transform: translate(-0.3px, 0.0px);
+          -moz-transform: translate(-0.3px, 0.0px);
+          -ms-transform: translate(-0.3px, 0.0px);
+          transform: translate(-0.3px, 0.0px);
+        }
+
+        9% {
+          -webkit-transform: translate(0.3px, 0.0px);
+          -moz-transform: translate(0.3px, 0.0px);
+          -ms-transform: translate(0.3px, 0.0px);
+          transform: translate(0.3px, 0.0px);
+        }
+
+        11% {
+          -webkit-transform: translate(-0.3px, 0.0px);
+          -moz-transform: translate(-0.3px, 0.0px);
+          -ms-transform: translate(-0.3px, 0.0px);
+          transform: translate(-0.3px, 0.0px);
+        }
+
+        13% {
+          -webkit-transform: translate(0.3px, 0.0px);
+          -moz-transform: translate(0.3px, 0.0px);
+          -ms-transform: translate(0.3px, 0.0px);
+          transform: translate(0.3px, 0.0px);
+        }
+
+        15% {
+          -webkit-transform: translate(-0.3px, 0.0px);
+          -moz-transform: translate(-0.3px, 0.0px);
+          -ms-transform: translate(-0.3px, 0.0px);
+          transform: translate(-0.3px, 0.0px);
+        }
+
+        16% {
+          -webkit-transform: translate(0.0px, 0.0px);
+          -moz-transform: translate(0.0px, 0.0px);
+          -ms-transform: translate(0.0px, 0.0px);
+          transform: translate(0.0px, 0.0px);
+        }
+
+        100% {
+          -webkit-transform: translate(0.0px, 0.0px);
+          -moz-transform: translate(0.0px, 0.0px);
+          -ms-transform: translate(0.0px, 0.0px);
+          transform: translate(0.0px, 0.0px);
+        }
+      }
+
+      .am-weather-frost {
+        -webkit-animation-name: am-weather-frost;
+        -moz-animation-name: am-weather-frost;
+        animation-name: am-weather-frost;
+        -webkit-animation-duration: 1.11s;
+        -moz-animation-duration: 1.11s;
+        animation-duration: 1.11s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+      ]]></style>
+  </defs>
+  <g
+     transform="matrix(2.3017466,0,0,2.3001124,5.5295927,1.4198262)"
+     filter="url(#blur)"
+     id="g2454">
+    <g
+       class="am-weather-frost"
+       stroke="#57a0ee"
+       transform="translate(0,2)"
+       fill="none"
+       stroke-width="2"
+       stroke-linecap="round"
+       style="-moz-animation-duration:1.11s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-frost;-moz-animation-timing-function:linear;-webkit-animation-duration:1.11s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-frost;-webkit-animation-timing-function:linear"
+       id="g2448">
+      <path
+         d="M 11,32 H 45"
+         id="path2442" />
+      <path
+         d="m 15.5,37 h 25"
+         id="path2444" />
+      <path
+         d="m 22.5,42 h 11"
+         id="path2446" />
+    </g>
+    <g
+       id="g2452">
+      <path
+         stroke="#57a0ee"
+         fill="none"
+         stroke-width="2"
+         stroke-linecap="round"
+         d="M 28,31 V 9 m 0,13 11,-3.67 M 34,20 36,16 m -2,4 4,2 M 28,22 17,18.33 M 22,20 20,16 m 2,4 -4,2 m 10,-7.73 3.01,-3.02 M 28,14.27 24.99,11.25"
+         id="path2450" />
+    </g>
+  </g>
+</svg>
