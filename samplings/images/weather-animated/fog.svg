@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- (c) ammap.com | SVG weather icons -->
+
+<svg
+   width="140"
+   height="124"
+   version="1.1"
+   id="svg2202"
+   sodipodi:docname="fog.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview2204"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="4.359375"
+     inkscape:cx="85.90681"
+     inkscape:cy="34.179211"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2202" />
+  <defs
+     id="defs2188">
+    <filter
+       id="blur"
+       x="-0.2"
+       y="-0.54666667"
+       width="1.4"
+       height="2.36">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="3"
+         id="feGaussianBlur2171" />
+      <feOffset
+         dx="0"
+         dy="4"
+         result="offsetblur"
+         id="feOffset2173" />
+      <feComponentTransfer
+         id="feComponentTransfer2177">
+        <feFuncA
+           slope="0.05"
+           type="linear"
+           id="feFuncA2175" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge2183">
+        <feMergeNode
+           id="feMergeNode2179" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode2181" />
+      </feMerge>
+    </filter>
+    <style
+       type="text/css"
+       id="style2186"><![CDATA[
+      /*
+** FOG
+*/
+      @keyframes am-weather-fog-1 {
+        0% {
+          transform: translate(0px, 0px)
+        }
+
+        50% {
+          transform: translate(7px, 0px)
+        }
+
+        100% {
+          transform: translate(0px, 0px)
+        }
+      }
+
+      .am-weather-fog-1 {
+        -webkit-animation-name: am-weather-fog-1;
+        -moz-animation-name: am-weather-fog-1;
+        -ms-animation-name: am-weather-fog-1;
+        animation-name: am-weather-fog-1;
+        -webkit-animation-duration: 8s;
+        -moz-animation-duration: 8s;
+        -ms-animation-duration: 8s;
+        animation-duration: 8s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        -ms-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes am-weather-fog-2 {
+        0% {
+          transform: translate(0px, 0px)
+        }
+
+        21.05% {
+          transform: translate(-6px, 0px)
+        }
+
+        78.95% {
+          transform: translate(9px, 0px)
+        }
+
+        100% {
+          transform: translate(0px, 0px)
+        }
+      }
+
+      .am-weather-fog-2 {
+        -webkit-animation-name: am-weather-fog-2;
+        -moz-animation-name: am-weather-fog-2;
+        -ms-animation-name: am-weather-fog-2;
+        animation-name: am-weather-fog-2;
+        -webkit-animation-duration: 20s;
+        -moz-animation-duration: 20s;
+        -ms-animation-duration: 20s;
+        animation-duration: 20s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        -ms-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes am-weather-fog-3 {
+        0% {
+          transform: translate(0px, 0px)
+        }
+
+        25% {
+          transform: translate(4px, 0px)
+        }
+
+        75% {
+          transform: translate(-4px, 0px)
+        }
+
+        100% {
+          transform: translate(0px, 0px)
+        }
+      }
+
+      .am-weather-fog-3 {
+        -webkit-animation-name: am-weather-fog-3;
+        -moz-animation-name: am-weather-fog-3;
+        -ms-animation-name: am-weather-fog-3;
+        animation-name: am-weather-fog-3;
+        -webkit-animation-duration: 6s;
+        -moz-animation-duration: 6s;
+        -ms-animation-duration: 6s;
+        animation-duration: 6s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        -ms-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+
+      @keyframes am-weather-fog-4 {
+        0% {
+          transform: translate(0px, 0px)
+        }
+
+        50% {
+          transform: translate(-4px, 0px)
+        }
+
+        100% {
+          transform: translate(0px, 0px)
+        }
+      }
+
+      .am-weather-fog-4 {
+        -webkit-animation-name: am-weather-fog-4;
+        -moz-animation-name: am-weather-fog-4;
+        -ms-animation-name: am-weather-fog-4;
+        animation-name: am-weather-fog-4;
+        -webkit-animation-duration: 6s;
+        -moz-animation-duration: 6s;
+        -ms-animation-duration: 6s;
+        animation-duration: 6s;
+        -webkit-animation-timing-function: linear;
+        -moz-animation-timing-function: linear;
+        -ms-animation-timing-function: linear;
+        animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
+      ]]></style>
+  </defs>
+  <g
+     transform="matrix(2.4858696,0,0,2.8771251,41.579167,-23.607047)"
+     filter="url(#blur)"
+     id="g2200">
+    <g
+       class="am-weather-fog"
+       transform="translate(-10,20)"
+       fill="none"
+       stroke="#c6deff"
+       stroke-linecap="round"
+       stroke-width="2"
+       id="g2198">
+      <line
+         class="am-weather-fog-1"
+         y1="0"
+         y2="0"
+         x1="1"
+         x2="37"
+         stroke-dasharray="3, 5, 17, 5, 7"
+         id="line2190"
+         style="-moz-animation-duration:8s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-fog-1;-moz-animation-timing-function:linear;-ms-animation-duration:8s;-ms-animation-iteration-count:infinite;-ms-animation-name:am-weather-fog-1;-ms-animation-timing-function:linear;-webkit-animation-duration:8s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-fog-1;-webkit-animation-timing-function:linear" />
+      <line
+         class="am-weather-fog-2"
+         y1="5"
+         y2="5"
+         x1="9"
+         x2="33"
+         stroke-dasharray="11, 7, 15"
+         id="line2192"
+         style="-moz-animation-duration:20s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-fog-2;-moz-animation-timing-function:linear;-ms-animation-duration:20s;-ms-animation-iteration-count:infinite;-ms-animation-name:am-weather-fog-2;-ms-animation-timing-function:linear;-webkit-animation-duration:20s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-fog-2;-webkit-animation-timing-function:linear" />
+      <line
+         class="am-weather-fog-3"
+         y1="10"
+         y2="10"
+         x1="5"
+         x2="40"
+         stroke-dasharray="11, 7, 3, 5, 9"
+         id="line2194"
+         style="-moz-animation-duration:6s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-fog-3;-moz-animation-timing-function:linear;-ms-animation-duration:6s;-ms-animation-iteration-count:infinite;-ms-animation-name:am-weather-fog-3;-ms-animation-timing-function:linear;-webkit-animation-duration:6s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-fog-3;-webkit-animation-timing-function:linear" />
+      <line
+         class="am-weather-fog-4"
+         y1="15"
+         y2="15"
+         x1="7"
+         x2="42"
+         stroke-dasharray="13, 5, 9, 5, 3"
+         id="line2196"
+         style="-moz-animation-duration:6s;-moz-animation-iteration-count:infinite;-moz-animation-name:am-weather-fog-4;-moz-animation-timing-function:linear;-ms-animation-duration:6s;-ms-animation-iteration-count:infinite;-ms-animation-name:am-weather-fog-4;-ms-animation-timing-function:linear;-webkit-animation-duration:6s;-webkit-animation-iteration-count:infinite;-webkit-animation-name:am-weather-fog-4;-webkit-animation-timing-function:linear" />
+    </g>
+  </g>
+</svg>

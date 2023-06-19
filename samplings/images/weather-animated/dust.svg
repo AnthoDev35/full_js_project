@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="140"
+   height="124"
+   version="1.1"
+   id="svg1963"
+   sodipodi:docname="dust.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1965"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="3.0825436"
+     inkscape:cx="82.886094"
+     inkscape:cy="51.905186"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1963" />
+  <defs
+     id="defs1951">
+    <filter
+       id="blur"
+       x="-0.20017572"
+       y="-0.29286417"
+       width="1.4004885"
+       height="1.7285871">
+      <feGaussianBlur
+         in="SourceAlpha"
+         stdDeviation="3"
+         id="feGaussianBlur1936" />
+      <feOffset
+         dx="0"
+         dy="4"
+         result="offsetblur"
+         id="feOffset1938" />
+      <feComponentTransfer
+         id="feComponentTransfer1942">
+        <feFuncA
+           slope="0.05"
+           type="linear"
+           id="feFuncA1940" />
+      </feComponentTransfer>
+      <feMerge
+         id="feMerge1948">
+        <feMergeNode
+           id="feMergeNode1944" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode1946" />
+      </feMerge>
+    </filter>
+  </defs>
+  <g
+     transform="matrix(2.575912,0,0,2.6513894,42.785249,-9.3342918)"
+     filter="url(#blur)"
+     id="g1961">
+    <g
+       class="am-weather-wind"
+       transform="translate(-16,10)"
+       fill="none"
+       stroke="#cd9e73"
+       stroke-linecap="round"
+       stroke-width="2"
+       id="g1959">
+      <path
+         stroke-dasharray="150, 10"
+         d="M 25.5,5 A 4,4 0 1 1 29,11 H 10"
+         id="path1953">
+        <animate
+           attributeName="stroke-dashoffset"
+           dur="3s"
+           repeatCount="indefinite"
+           values="0; 160"
+           begin="0s" />
+      </path>
+      <path
+         stroke-dasharray="144, 16"
+         d="M 39.5,11 A 4,4 0 1 1 43,17 H 6"
+         id="path1955">
+        <animate
+           attributeName="stroke-dashoffset"
+           dur="3s"
+           repeatCount="indefinite"
+           values="0; 160"
+           begin="0.5s" />
+      </path>
+      <path
+         stroke-dasharray="150, 10"
+         d="M 28.5,29 A 4,4 0 1 0 32,23 H 15"
+         id="path1957">
+        <animate
+           attributeName="stroke-dashoffset"
+           dur="3s"
+           repeatCount="indefinite"
+           values="0; 160"
+           begin="0.25s" />
+      </path>
+    </g>
+  </g>
+</svg>
