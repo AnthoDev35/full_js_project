@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style pour le pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 9999;
+        }
+        .popup h2{
+            padding:10px;
+            margin: 0;
+            background-color: #0e855d;
+            color: #fff;
+        }
+        .popup form{
+            margin:10px;
+            padding:0 10px
+        }
+        .popup form>input,
+        .popup form>select{
+            margin:5px 0
+        }
+        .popup form button{
+            background-color: #0e855d;
+            color: #fff;
+            margin:10px;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        /* Style pour les boutons */
+        .popup-buttons button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-buttons">
+        <!-- Boutons pour les options -->
+        <button onclick="popupManager.openPopup(1)">Option 1</button>
+        <button onclick="popupManager.openPopup(2)">Option 2</button>
+        <!-- Ajoutez les autres boutons d'options ici -->
+    </div>
+
+    <div class="popup">
+        <div class="popup-content"></div>
+    </div>
+    <script src="popupManager.js"></script>
+</body>
+</html>
