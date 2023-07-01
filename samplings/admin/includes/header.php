@@ -17,19 +17,43 @@
 			<input type="text" placeholder="text here" name="top_search_input" id="top_search_input"/>
 		</div>
 		<div class="right-section">
-			<div class="infos"><i class="fas fa-cogs"></i></div>
-			<div class="message"><i class="fas fa-envelope"></i></div>
-			<div class="user"><i class="fas fa-user"></i></div>
+			<div class="infos">
+				<i class="fas fa-cogs dropdown-toggle"></i>
+				<div class="top-dropdown">
+					<div class="header">Title test</div>
+					<div class="content">
+						<a href="#">test</a>
+						<a href="#">test</a>
+					</div>
+					<div class="footer">
+						<button class="">Valider</button>
+					</div>
+				</div>
+			</div>
+			<div class="message">
+				<i class="fas fa-envelope dropdown-toggle"></i>
+				<div class="top-dropdown">
+					<div class="header">Title enveloppe</div>
+					<div class="content">
+						<a href="#">test</a>
+						<a href="#">test</a>
+					</div>
+					<div class="footer">
+						<button class="">Valider</button>
+					</div>
+				</div>
+		</div>
+			<div class="user"><i class="fas fa-user dropdown-toggle"></i></div>
 		</div>
 	</header>
 	<nav>
 		<ul>
-			<li><a href="#">Test</a></li>
-			<li><a href="#">Test 2 <i class="fas fa-chevron-down"></i></a>
+			<li><a href="#"><i class="fas fa-home"></i> Test</a></li>
+			<li><a href="#"><i class="fas fa-file"></i> Test 2 <i class="fas fa-chevron-down right"></i></a>
 				<ul>
 					<li><a href="#">Test 2.1</a></li>
 					<li><a href="#">Test 2.2</a></li>
-					<li><a href="#">Test 2.3 <i class="fas fa-chevron-down"></i></a>
+					<li><a href="#">Test 2.3 <i class="fas fa-chevron-down right"></i></a>
 						<ul>
 							<li><a href="#">Test 2.3.1</a></li>
 							<li><a href="#">Test 2.3.2</a></li>
@@ -38,8 +62,8 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#">test</a></li>
-			<li><a href="#">test</a></li>
+			<li><a href="#"><i class="fas fa-cogs"></i> test</a></li>
+			<li><a href="#"><i class="fas fa-users"></i> test</a></li>
 		</ul>
 	</nav>
 	<main>

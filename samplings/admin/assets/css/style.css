@@ -9,13 +9,15 @@ header{
     position: fixed;
     align-items: center;
     justify-content: space-between;
-    background-color: #49bdbd;
+    background-color: #fff;
+    border-bottom: 1px solid #bebebe;
 }
 
 header .left-section{
     width: 250px;
     display: flex;
     justify-content: center;
+    margin: 5px;
 }
 header .left-section img{
     padding: 10px;
@@ -54,6 +56,20 @@ header .right-section i:hover{
     cursor: pointer;
     scale: 1.2;
 }
+header .right-section .top-dropdown{
+    position: absolute;
+    top: calc(100% - 10px);
+    right: 10px;
+    width: 200px; /* Ajustez la largeur selon vos besoins */
+    background-color: #fff; /* Couleur de fond du dropdown */
+    border: 1px solid #ccc; /* Bordure du dropdown */
+    padding: 10px; /* Marge interne du dropdown */
+    display: none; /* Par défaut, le dropdown est masqué */
+    box-shadow: 0 0 4px 0 #bebebe;
+}
+header .right-section .dropdown-toggle.active + .top-dropdown {
+    display: block; /* Affiche le dropdown lorsqu'il est actif */
+}
 nav{
     border-right: 1px solid #bebebe;
     position: fixed;
@@ -61,6 +77,7 @@ nav{
     width: 250px;
     height: 100%;
     padding: 20px 0;
+    box-shadow: 1px 1px 4px 0 #bebebe;
 }
 nav ul {
     margin: 0;
@@ -80,25 +97,7 @@ nav ul li{
     padding: 0 0 0 10px ;
 }
 nav ul li a{
-    font-size: 14px;
-    text-decoration: none;
-    color: #000;
-    background: #fff;
-    border: 1px solid transparent;
-    border-radius: 5px;
-    transition: all 0.2s ease-in-out;
-    margin: 0;
-    padding: 5px;
-}
-nav ul li a:hover{
-    border-color: #bebebe;
-    cursor: pointer;
-    padding-left: 10px;
-    box-shadow: 0 0 5px 0px #bebebe;
-}
-nav ul li a{
     display: flex;
-    justify-content: space-between;
     align-items: center;
     font-size: 14px;
     text-decoration: none;
@@ -108,14 +107,26 @@ nav ul li a{
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
     margin: 0;
-    padding: 5px;
+    padding: 8px 5px;
+}
+nav ul li a:hover{
+    border-color: #bebebe;
+    cursor: pointer;
+    padding-left: 10px;
+    box-shadow: 0 0 5px 0px #bebebe;
 }
 nav ul li a i{
     font-size: 14px;
+    margin-right: 5px;
+}
+nav ul li a i.right{
+    right: 10px;
+    font-size: 14px;
     margin-right: 10px;
     transition: all 0.2s ease-in-out;
+    position: absolute;
 }
-nav ul li.opened > a > i {
+nav ul li.opened > a > i.right {
     transform: rotate(-180deg);
 }
 nav ul li.opened > a{
@@ -123,7 +134,17 @@ nav ul li.opened > a{
       cursor: pointer;
       padding-left: 10px;
       box-shadow: 0 0 5px 0px #bebebe;
-  }
+}
+
+main .content{
+    position: fixed;
+    top: 60px;
+    left: 250px;
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+}
+
 footer{
-    
+    padding:5px
 }

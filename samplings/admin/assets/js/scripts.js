@@ -16,4 +16,29 @@ document.addEventListener("DOMContentLoaded", function () {
 			e.preventDefault();
 		});
 	}
+
+	const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+	dropdownToggles.forEach(function (toggle) {
+		toggle.addEventListener('click', function () {
+			var dropdown = this.parentElement.querySelector('.top-dropdown');
+			closeAllDropdowns();
+			if (dropdown) {
+				dropdown.classList.remove('active');
+			}
+			toggle.classList.add('active');
+		});
+	});
+
+	function closeAllDropdowns() {
+		dropdownToggles.forEach(function (dropdown) {
+			dropdown.classList.remove('active');
+		});
+	}
+
+	document.addEventListener('click', function (event) {
+		if (!event.target.matches('.dropdown-toggle')) {
+			closeAllDropdowns();
+		}
+	});
+
 });
