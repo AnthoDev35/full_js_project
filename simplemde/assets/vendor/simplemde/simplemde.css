@@ -612,3 +612,59 @@ span.CodeMirror-selectedtext { background: none; }
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
     background: rgba(255, 0, 0, .15);
 }
+
+.simplemde-popup{
+  display: none;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 80px;
+  background-color: #fff;
+  width: 80%;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #000;
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.simplemde-popup.active{
+  display: block;
+}
+
+.popup-title{
+  background-color: #1b4cb4;
+  height: 40px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.popup-content{
+  padding: 10px;
+  height: 200px;
+  overflow: auto;
+}
+
+.popup-button-group{
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancel{
+  cursor: pointer;
+  background-color: #a10000;
+  color: #fff;
+}
+.btn-confirm{
+  cursor: pointer;
+  background-color: #1b4cb4;
+  color: #fff;
+}

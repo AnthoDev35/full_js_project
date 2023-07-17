@@ -15060,7 +15060,8 @@
 				"toggleHeading2": toggleHeading2,
 				"toggleHeading3": toggleHeading3,
 				"cleanBlock": cleanBlock,
-				"toggleFullScreen": toggleFullScreen
+				"toggleFullScreen": toggleFullScreen,
+				"functionAddImage": functionAddImage
 			};
 
 			const shortcuts = {
@@ -15239,6 +15240,13 @@
 
 			}
 
+			/**
+			 * Function add image
+			 */
+			function functionAddImage(editor){
+				console.log('test add image');
+				_createPopup('Ajouter une image');
+			}
 
 			/**
 			 * Action for toggling bold.
@@ -15661,6 +15669,46 @@
 
 			}
 
+			function _createPopup(title){
+				const element_id = `popup_0`;
+				const body = document.body;
+				const container_el = document.createElement('div');
+				container_el.classList.add('simplemde-popup','popup-width-medium');
+				container_el.id = element_id;
+
+				const title_el = document.createElement('div');
+				title_el.classList.add('popup-title');
+				title_el.innerText = title;
+
+				const content_el = document.createElement('div');
+				content_el.classList.add('popup-content');
+
+				const table_el = document.createElement('table');
+				table_el.classList.add('popup-table');
+
+				content_el.appendChild(table_el);
+
+				const button_el = document.createElement('div');
+				button_el.classList.add('popup-button-group');
+				
+				const button_confirm_el = document.createElement('button');
+				button_confirm_el.classList.add('btn-confirm');
+				button_confirm_el.innerText = 'Valider';
+				const button_cancel_el = document.createElement('button');
+				button_cancel_el.classList.add('btn-cancel');
+				button_cancel_el.innerText = 'Annuler';
+				button_cancel_el.onclick = `_removePopup(${element_id})`; // not work todo
+
+				button_el.append(button_cancel_el, button_confirm_el);
+				container_el.append(title_el,content_el, button_el);
+				body.appendChild(container_el);
+
+				container_el.classList.add('active');
+			}
+
+			function _removePopup(element){
+				element.classList.remove('active');
+			}
 			function _replaceSelection(cm, active, startEnd, url) {
 				if (/editor-preview-active/.test(cm.getWrapperElement().lastChild.className))
 					return;
@@ -16052,7 +16100,14 @@
 				},
 				"separator-3": {
 					name: "separator-3"
-				}
+				},
+				"images": {
+					name: "add-image",
+					action: functionAddImage,
+					className: "fa fa-image",
+					title: "Add image",
+					default: true
+				},
 			};
 
 			var insertTexts = {
@@ -16666,6 +16721,7 @@
 			SimpleMDE.cleanBlock = cleanBlock;
 			SimpleMDE.togglePreview = togglePreview;
 			SimpleMDE.toggleFullScreen = toggleFullScreen;
+			SimpleMDE.functionAddImage = functionAddImage;
 
 			/**
 			 * Bind instance methods for exports.
@@ -16714,6 +16770,9 @@
 			};
 			SimpleMDE.prototype.toggleFullScreen = function () {
 				toggleFullScreen(this);
+			};
+			SimpleMDE.prototype.functionAddImage = function () {
+				functionAddImage(this);
 			};
 
 			SimpleMDE.prototype.isPreviewActive = function () {
